@@ -84,3 +84,9 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+// see: https://docs.qmk.fm/#/tap_hold?id=ignore-mod-tap-interrupt
+#define IGNORE_MOD_TAP_INTERRUPT
+
+// Activate CAPS WORD by pressing Left Shift + Right Shift
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
