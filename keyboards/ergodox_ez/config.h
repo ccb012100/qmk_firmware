@@ -82,7 +82,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * manufacturer specs.
  */
 
-
 // RGB backlight
 #define IS31FL3731_I2C_ADDRESS_1 IS31FL3731_I2C_ADDRESS_GND
 #define IS31FL3731_I2C_ADDRESS_2 IS31FL3731_I2C_ADDRESS_VCC
@@ -113,3 +112,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_ONESHOT
 
 //#define DEBUG_MATRIX_SCAN_RATE
+
+// Caps Word (<https://docs.qmk.fm/features/caps_word>)
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+#define CAPS_WORD_INVERT_ON_SHIFT
+
+// Copied over from my Oryx ZSA config
+#undef RGB_MATRIX_TIMEOUT
+#define RGB_MATRIX_TIMEOUT 900000
+
+#define USB_SUSPEND_WAKEUP_DELAY 0
+#define CAPS_LOCK_STATUS
+#define SERIAL_NUMBER "NW6eB/67xEE"
+#define LAYER_STATE_8BIT
+
+#define RGB_MATRIX_STARTUP_SPD 60
+
+#undef ENABLE_RGB_MATRIX_BAND_VAL
+#undef ENABLE_RGB_MATRIX_BAND_PINWHEEL_SAT
+#undef ENABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
+#undef ENABLE_RGB_MATRIX_BAND_SPIRAL_SAT
+#undef ENABLE_RGB_MATRIX_BAND_SPIRAL_VAL
+#undef ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+#undef ENABLE_RGB_MATRIX_PIXEL_FLOW
+#undef ENABLE_RGB_MATRIX_PIXEL_RAIN
