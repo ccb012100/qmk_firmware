@@ -2,96 +2,75 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-// TODO: add enum with better layer names
-// TODO: extend repeat key to include "(" and ")" (<https://docs.qmk.fm/features/repeat_key#alternate-repeating>)
-// TODO: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
+// TODO: extend repeat key to include `(` and `)` (<https://docs.qmk.fm/features/repeat_key#alternate-repeating>)
+// FIX: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
 
+enum layers {
+    BASE,  // default layer
+    SYMB,  // symbols (Right hand)
+    NAV,   // Arrow keys (Right hand)
+    FKEYS, // Fn Keys (Left hand)
+};
 enum custom_keycodes {
     VRSN = SAFE_RANGE,
 };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_ergodox_pretty(
-        // R1
-        /* left hand */ KC_GRAVE, KC_1, KC_2, KC_3, KC_4, KC_5, KC_MEDIA_PLAY_PAUSE, /* right hand */ KC_PSCR, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSPC,
-        // R2
-        /* left hand */ KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_AUDIO_VOL_UP, /* right hand */ QK_ALT_REPEAT_KEY, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_EQUAL,
-        // R3
-        /* left hand */ MEH_T(KC_ESCAPE), KC_A, KC_S, KC_D, KC_F, KC_G, /* right hand */ KC_H, KC_J, KC_K, KC_L, KC_SCLN, MEH_T(KC_QUOTE),
-        // R4
-        /* left hand */ KC_LEFT_SHIFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_AUDIO_VOL_DOWN, /* right hand */ QK_REPEAT_KEY, KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLASH, KC_RIGHT_SHIFT,
-        // R5
-        /* left hand */ KC_LEFT_CTRL, KC_MEH, RGB_TOG, KC_LEFT_GUI, KC_LEFT_ALT, /* right hand */ KC_RIGHT_ALT, KC_RIGHT_GUI, KC_APPLICATION, KC_MEH, KC_RIGHT_CTRL,
-        // R6
-        /* left hand */ KC_LEFT, KC_DOWN, /* right hand */ KC_UP, KC_RIGHT,
-        // R7
-        /* left hand */ KC_MS_BTN5, /* right hand */ KC_MS_BTN5,
-        // R8
-        /* left hand */ MT(MOD_LCTL, KC_BSPC), LT(1, KC_TAB), KC_MS_BTN4, /* right hand */ KC_MS_BTN4, LT(3, KC_ENTER), MT(MOD_RCTL, KC_SPACE)),
+    [BASE] = LAYOUT_ergodox_pretty(
+        KC_GRAVE,           KC_1,           KC_2,    KC_3,        KC_4,        KC_5,  KC_MEDIA_PLAY_PAUSE,                         /* split */        KC_PSCR,           KC_6, KC_7,         KC_8,         KC_9,           KC_0,     KC_BSPC,
+        KC_TAB,             KC_Q,           KC_W,    KC_E,        KC_R,        KC_T,  KC_AUDIO_VOL_UP,                             /* split */        QK_ALT_REPEAT_KEY, KC_Y, KC_U,         KC_I,         KC_O,           KC_P,     KC_EQUAL,
+        MEH_T(KC_ESCAPE),   KC_A,           KC_S,    KC_D,        KC_F,        KC_G,                                               /* split */                           KC_H, KC_J,         KC_K,         KC_L,           KC_SCLN,  MEH_T(KC_QUOTE),
+        KC_LEFT_SHIFT,      KC_Z,           KC_X,    KC_C,        KC_V,        KC_B,  KC_AUDIO_VOL_DOWN,                           /* split */        QK_REPEAT_KEY,     KC_N, KC_M,         KC_COMMA,     KC_DOT,         KC_SLASH, KC_RIGHT_SHIFT,
+        KC_LEFT_CTRL,       KC_MEH,         RGB_TOG, KC_LEFT_GUI, KC_LEFT_ALT,                                                     /* split */                                 KC_RIGHT_ALT, KC_RIGHT_GUI, KC_APPLICATION, KC_MEH,   KC_RIGHT_CTRL,
+    //                       ⭦ left hand ⭧                              ⭩ left thumb cluster ⭨                                                  ⭩ right thumb cluster ⭨                      ⭦ right hand ⭧
+                                                                               KC_LEFT,         KC_DOWN,                /* split */  KC_UP,       KC_RIGHT,
+                                                                                                KC_HOME,                /* split */  KC_PAGE_UP,
+                                                        MT(MOD_LCTL, KC_BSPC), LT(SYMB,KC_TAB), KC_END,                 /* split */  KC_PGDN,     LT(FKEYS,KC_ENTER), MT(MOD_RCTL, KC_SPACE)),
     // Layer 1 Symbols
-    [1] = LAYOUT_ergodox_pretty(
-        // R1
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_INSERT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R2
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_PERC, KC_LBRC, KC_ASTR, KC_AT, KC_PIPE, KC_RBRC,
-        // R3
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_EXLM, KC_LPRN, KC_HASH, KC_UNDS, KC_MINUS, KC_RPRN,
-        // R4
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_CIRC, KC_LCBR, KC_AMPR, KC_DLR, KC_BSLS, KC_RCBR,
-        // R 5
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R6
-        /* left hand */ RGB_HUD, RGB_HUI, RGB_M_P, RGB_TOG,
-        // R7
-        /* left hand */ RGB_SAI, TOGGLE_LAYER_COLOR,
-        // R8
-        /* left hand */ MT(MOD_LCTL, KC_DELETE), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
-
-    // Layer 2 Navigation
-    [2] = LAYOUT_ergodox_pretty(
-        // R1
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_CALCULATOR, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R2
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_HOME, KC_END, KC_PSCR, QK_REPEAT_KEY, KC_TRANSPARENT,
-        // R3
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_TILD, KC_GRAVE,
-        // R4
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_PAGE_UP, KC_PGDN, KC_INSERT, QK_ALT_REPEAT_KEY, KC_CAPS,
-        // R5
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R6
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R7
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT,
-        // R8
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
+    [SYMB] = LAYOUT_ergodox_pretty(
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_INSERT,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_TRANSPARENT, KC_TRANSPARENT, KC_LBRC,        KC_RBRC,        KC_PIPE,        KC_TILD,        QK_ALT_REPEAT_KEY,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */                        KC_PERC,        KC_LPRN,        KC_RPRN,        KC_MINUS,       KC_GRAVE,       QK_REPEAT_KEY,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_TRANSPARENT, KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_UNDS,        KC_BSLS,        KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 /* split */                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    //                       ⭦ left hand ⭧                              ⭩ left thumb cluster ⭨                                              ⭩ right thumb cluster ⭨                               ⭦ right hand ⭧
+                                                                        KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                                        KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT,
+                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
+    // Layer 2 Arrows
+    [NAV] = LAYOUT_ergodox_pretty(
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_CALCULATOR,  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,    KC_CAPS,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_TRANSPARENT, LGUI(KC_LEFT),  LGUI(KC_DOWN),  LGUI(KC_UP),    LGUI(KC_RIGHT), KC_TRANSPARENT,    KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */                        KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       QK_REPEAT_KEY,     KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, /* split */        KC_TRANSPARENT, LALT(KC_LEFT),  LALT(KC_DOWN),  LALT(KC_UP),    RALT(KC_RIGHT), QK_ALT_REPEAT_KEY, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,    KC_TRANSPARENT,
+    //                       ⭦ left hand ⭧                              ⭩ left thumb cluster ⭨                                                  ⭩ right thumb cluster ⭨                               ⭦ right hand ⭧
+                                                                        KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                                        KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT,
+                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 /* split */  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
     // Layer 3 Function Keys
-    [3] = LAYOUT_ergodox_pretty(
-        // R1
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R2
-        /* left hand */ KC_TRANSPARENT, KC_F1, KC_F2, KC_F3, KC_F4, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R3
-        /* left hand */ KC_TRANSPARENT, KC_F5, KC_F6, KC_F7, KC_F8, KC_CALCULATOR, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R4
-        /* left hand */ KC_TRANSPARENT, KC_F9, KC_F10, KC_F11, KC_F12, KC_F13, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R5
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-        // R6
-        /* left hand */ RGB_HUD, RGB_HUI, RGB_M_P, RGB_TOG,
-        // R7
-        /* left hand */ UG_SATU, TOGGLE_LAYER_COLOR,
-        // R8
-        /* left hand */ KC_TRANSPARENT, KC_TRANSPARENT, UG_SATD, RGB_MODE_FORWARD, KC_TRANSPARENT, KC_TRANSPARENT),
+    [FKEYS] = LAYOUT_ergodox_pretty(
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,  KC_TRANSPARENT, KC_TRANSPARENT,    KC_CALCULATOR,  /* split */      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_F1,          KC_F2,          KC_F3,           KC_F4,          QK_ALT_REPEAT_KEY, KC_TRANSPARENT, /* split */      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_F5,          KC_F6,          KC_F7,           KC_F8,          QK_REPEAT_KEY,                     /* split */                      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_F9,          KC_F10,         KC_F11,          KC_F12,         KC_F13,            KC_TRANSPARENT, /* split */      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+        KC_TRANSPARENT,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                    /* split */                                       KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    //                       ⭦ left hand ⭧                           ⭩ left thumb cluster ⭨                                                        ⭩ right thumb cluster ⭨                               ⭦ right hand ⭧
+                                                                        RGB_HUD,        RGB_HUI,                              /* split */  RGB_M_P,          RGB_TOG,
+                                                                                        UG_SATU,                              /* split */  TOGGLE_LAYER_COLOR,
+                                               MT(MOD_LCTL, KC_DELETE), KC_TRANSPARENT, UG_SATD,                              /* split */  RGB_MODE_FORWARD, KC_TRANSPARENT, KC_TRANSPARENT),
 };
 // clang-format on
 
-// nav_layer combo = 2 large buttons on the left thumb cluster
-const uint16_t PROGMEM nav_layer[] = {LT(1, KC_TAB), MT(MOD_LCTL, KC_BSPC), COMBO_END};
+// nav_thumbs combo = 2 large buttons on the left thumb cluster
+const uint16_t PROGMEM nav_thumbs[] = {LT(SYMB, KC_TAB), MT(MOD_LCTL, KC_BSPC), COMBO_END};
+// nav_fd combo = F and D
+const uint16_t PROGMEM nav_fd[] = {KC_D, KC_F, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-    COMBO(nav_layer, MO(2)), // when holding the nav_layer combo, toggle Layer 2 (navigation layer)
+combo_t key_combos[] = {
+    COMBO(nav_thumbs, MO(NAV)), // toggle the NAV layer while holding the 2 large thumb buttons on the left hand
+    COMBO(nav_fd, MO(NAV)),     // toggle the NAV layer while holding F & D
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
