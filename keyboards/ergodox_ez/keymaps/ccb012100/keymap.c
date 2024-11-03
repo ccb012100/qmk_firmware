@@ -2,8 +2,8 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-// TODO: extend repeat key to include `(` and `)` (<https://docs.qmk.fm/features/repeat_key#alternate-repeating>)
-// FIX: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
+// TODO: extend repeat key to include `(` and `)` (<https://docs.qmk.fm/features/repeat_key#defining-alternate-keys>)
+// FIXME: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
 
 enum layers {
     BASE,  // default layer
