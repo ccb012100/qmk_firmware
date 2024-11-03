@@ -7,9 +7,9 @@
 
 enum layers {
     BASE,  // default layer
-    SYMB,  // symbols (Right hand)
+    RIGHT, // symbols, Fn Keys (Right hand)
     NAV,   // Arrow keys (Right hand)
-    FKEYS, // Fn Keys (Left hand)
+    LEFT,  // Symbols, Fn Keys (Left hand)
 };
 enum custom_keycodes {
     VRSN = SAFE_RANGE,
@@ -24,47 +24,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LEFT_SHIFT,  KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_VOLD,    /* split */     QK_REP,     KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_RIGHT_SHIFT,
         KC_LEFT_CTRL,   KC_MEH,     RGB_TOG,    KC_LGUI,    KC_LALT,                            /* split */                                 KC_RALT,        KC_RGUI,        KC_APP,         KC_MEH,         KC_RIGHT_CTRL,
     //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
-                                                      KC_LEFT,         KC_DOWN,                 /* split */                                     KC_UP,              KC_RIGHT,
-                                                                       KC_HOME,                 /* split */                                     KC_PAGE_UP,
-                                MT(MOD_LCTL,KC_BSPC), LT(SYMB,KC_TAB), KC_END,                  /* split */                                     KC_PGDN,            LT(FKEYS,KC_ENTER), MT(MOD_RCTL, KC_SPACE)),
-    // Layer 1 Symbols
-    [SYMB] = LAYOUT_ergodox_pretty(
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_INS,     KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_TRNS,        KC_LBRC,        KC_RBRC,        KC_PIPE,        KC_TILD,        QK_AREP,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                /* split */                 KC_PERC,        KC_LPRN,        KC_RPRN,        KC_MINUS,       KC_GRAVE,       QK_REP,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_UNDS,        KC_BSLS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-    //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
-                                                     KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,
-                                                              KC_TRNS,                          /* split */                                     KC_TRNS,
-                                            KC_TRNS, KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,            KC_TRNS),
-    // Layer 2 Arrows
-    [NAV] = LAYOUT_ergodox_pretty(
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_CALC,    KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_CAPS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    LGUI(KC_LEFT),  LGUI(KC_DOWN),  LGUI(KC_UP),    LGUI(KC_RIGHT), KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                /* split */                 KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       QK_REP,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    LALT(KC_LEFT),  LALT(KC_DOWN),  LALT(KC_UP),    RALT(KC_RIGHT), QK_AREP,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-    //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
-                                                     KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,
-                                                              KC_TRNS,                          /* split */                                     KC_TRNS,
-                                            KC_TRNS, KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,            KC_TRNS),
-    // Layer 3 Function Keys
-    [FKEYS] = LAYOUT_ergodox_pretty(
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_CALC,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_F1,      KC_F2,      KC_F3,      KC_F4,      QK_AREP,    KC_TRNS,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_F5,      KC_F6,      KC_F7,      KC_F8,      QK_REP,                 /* split */                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                            KC_LEFT,         KC_DOWN,                           /* split */                                     KC_UP,              KC_RIGHT,
+                                                             KC_HOME,                           /* split */                                     KC_PAGE_UP,
+                      MT(MOD_LCTL,KC_BSPC), LT(RIGHT,KC_TAB),KC_END,                            /* split */                                     KC_PGDN,            LT(LEFT,KC_ENTER), MT(MOD_RCTL, KC_SPACE)
+    ),
+    // Layer 1
+    [LEFT] = LAYOUT_ergodox_pretty(
+        KC_TRNS,        KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_CALC,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_TRNS,    KC_TRNS,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,                /* split */                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_F9,      KC_F10,     KC_F11,     KC_F12,     KC_F13,     KC_TRNS,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
     //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
                                                     RGB_HUD, RGB_HUI,                           /* split */                                     RGB_M_P,            RGB_TOG,
                                                              UG_SATU,                           /* split */                                     TOGGLE_LAYER_COLOR,
-                            MT(MOD_LCTL,KC_DELETE), KC_TRNS, UG_SATD,                           /* split */                                     RGB_MODE_FORWARD,   KC_TRNS,            KC_TRNS),
+                            MT(MOD_LCTL,KC_DELETE), KC_TRNS, UG_SATD,                           /* split */                                     RGB_MODE_FORWARD,   KC_TRNS,            KC_TRNS
+    ),
+    // Layer 2
+    [RIGHT] = LAYOUT_ergodox_pretty(
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_INS,     KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,        KC_F11,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_PIPE,        KC_LCBR,        KC_RCBR,        KC_LBRC,        KC_RBRC,       QK_AREP,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                /* split */                 KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_LPRN,        KC_RPRN,       QK_REP,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_TILD,        KC_MINUS,       KC_UNDS,        KC_GRAVE,       KC_BSLS,       KC_TRNS,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,       KC_TRNS,
+    //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
+                                                     KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,
+                                                              KC_TRNS,                          /* split */                                     KC_TRNS,
+                                            KC_TRNS, KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,            KC_TRNS
+    ),
+    // Layer 3
+    [NAV] = LAYOUT_ergodox_pretty(
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_CALC,    KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_CAPS,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    LGUI(KC_LEFT),  LGUI(KC_DOWN),  LGUI(KC_UP),    LGUI(KC_RIGHT), KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                /* split */                 KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_MS_BTN4,     KC_TRNS,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    LALT(KC_LEFT),  LALT(KC_DOWN),  LALT(KC_UP),    RALT(KC_RIGHT), KC_MS_BTN5,     KC_TRNS,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+    //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
+                                                     KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,
+                                                              KC_TRNS,                          /* split */                                     KC_TRNS,
+                                            KC_TRNS, KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,            KC_TRNS
+    ),
 };
 // clang-format on
 
 // nav_thumbs combo = 2 large buttons on the left thumb cluster
-const uint16_t PROGMEM nav_thumbs[] = {LT(SYMB, KC_TAB), MT(MOD_LCTL, KC_BSPC), COMBO_END};
+const uint16_t PROGMEM nav_thumbs[] = {LT(RIGHT, KC_TAB), MT(MOD_LCTL, KC_BSPC), COMBO_END};
 // nav_fd combo = F and D
 const uint16_t PROGMEM nav_fd[] = {KC_D, KC_F, COMBO_END};
 
