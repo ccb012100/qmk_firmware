@@ -2,7 +2,6 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-// TODO: extend repeat key to include `(` and `)` (<https://docs.qmk.fm/features/repeat_key#defining-alternate-keys>)
 // FIXME: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
 
 enum layers {
@@ -76,6 +75,18 @@ combo_t key_combos[] = {
     COMBO(nav_thumbs, MO(NAV)), // toggle the NAV layer while holding the 2 large thumb buttons on the left hand
     COMBO(nav_fd, MO(NAV)),     // toggle the NAV layer while holding F & D
 };
+
+// add mod + ( ) to the alternate repeat key pairings
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    switch (keycode) {
+        case KC_LPRN:
+            return C(KC_RPRN);
+        case KC_RPRN:
+            return C(KC_RPRN);
+    }
+
+    return KC_TRNS; // Defer to default definitions.
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
