@@ -78,13 +78,13 @@ combo_t key_combos[] = {
     COMBO(nav_fd, MO(NAV)),         // toggle the NAV layer while holding down F & D
 };
 
-// add mod + ( ) to the alternate repeat key pairings
+// add <Left paren/right paren> to the alternate repeat key pairings
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     switch (keycode) {
         case KC_LPRN:
-            return C(KC_RPRN);
+            return KC_RPRN;
         case KC_RPRN:
-            return C(KC_RPRN);
+            return KC_LPRN;
     }
 
     return KC_TRNS; // Defer to default definitions.
