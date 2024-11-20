@@ -2,6 +2,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
+// keycodes: <https://github.com/qmk/qmk_firmware/blob/master/docs/keycodes.md>
 // FIXME: when holding `LT(3, KC_ENTER)`, the third LED (blue) flashes quickly once instead of remaining on
 
 enum layers {
