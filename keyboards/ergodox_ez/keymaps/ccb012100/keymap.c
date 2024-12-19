@@ -67,16 +67,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-// nav_thumbs combo = 2 large buttons on the left thumb cluster
-const uint16_t PROGMEM nav_thumb_left[] = {LT(RIGHT, KC_TAB), MT(MOD_LCTL, KC_BSPC), COMBO_END};
-// nav_fd combo = F and D
-const uint16_t PROGMEM nav_fd[]     = {KC_D, KC_F, COMBO_END};
+// nav_combo = F and D
+const uint16_t PROGMEM nav_combo[]  = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM nav_thumbs[] = {MT(MOD_LCTL, KC_BSPC), MT(MOD_RCTL, KC_SPACE), COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(nav_thumb_left, MO(NAV)), // toggle the NAV layer while holding down both of the large thumb buttons on the left hand
-    COMBO(nav_thumbs, MO(NAV)),     // toggle the NAV layer while holding down both thumbs
-    COMBO(nav_fd, MO(NAV)),         // toggle the NAV layer while holding down F & D
+    COMBO(nav_thumbs, MO(NAV)), // toggle the NAV layer while holding down both thumbs
+    COMBO(nav_combo, MO(NAV)),  // toggle the NAV layer while holding down F & D
 };
 
 // add <Left paren/right paren> to the alternate repeat key pairings
