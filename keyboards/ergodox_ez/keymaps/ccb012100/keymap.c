@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Layer 2
     [RIGHT] = LAYOUT_ergodox_pretty(
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_INS,     KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,     KC_F11,
-        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_PIPE,        KC_LCBR,        KC_RCBR,        KC_LBRC,        KC_RBRC,    QK_AREP,
+        KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_PIPE,        KC_LCBR,        KC_RCBR,        KC_LBRC,        KC_RBRC,    KC_F12,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                /* split */                 KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_LPRN,        KC_RPRN,    QK_REP,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_TILD,        KC_MINUS,       KC_UNDS,        KC_GRAVE,       KC_BSLS,    KC_TRNS,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,    KC_TRNS,
