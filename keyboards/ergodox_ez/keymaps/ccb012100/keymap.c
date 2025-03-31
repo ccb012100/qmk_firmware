@@ -36,9 +36,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_F9,      KC_F10,     KC_F11,     KC_F12,     KC_F13,     KC_TRNS,    /* split */      KC_TRNS,   KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,    KC_TRNS,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,    KC_TRNS,
     //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
-                                                    RGB_HUD, RGB_HUI,                           /* split */                                     RGB_M_P,            RGB_TOG,
-                                                             UG_SATU,                           /* split */                                     TOGGLE_LAYER_COLOR,
-                            MT(MOD_LCTL,KC_DELETE), KC_TRNS, UG_SATD,                           /* split */                                     RGB_MODE_FORWARD,   KC_TRNS,            KC_TRNS
+                                                    RM_HUED, RM_HUEU,                           /* split */                                     RGB_M_P,            RM_TOGG,
+                                                             UG_SATU,                           /* split */                                     RM_NEXT,
+                            MT(MOD_LCTL,KC_DELETE), KC_TRNS, UG_SATD,                           /* split */                                     RM_PREV,            KC_TRNS,            KC_TRNS
     ),
     // Layer 2
     [RIGHT] = LAYOUT_ergodox_pretty(
@@ -48,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    /* split */     KC_TRNS,    KC_TILD,        KC_MINUS,       KC_UNDS,        KC_GRAVE,       KC_BSLS,    KC_TRNS,
         KC_TRNS,        KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                            /* split */                                 KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,    KC_TRNS,
     //             ⭦ left hand ⭧              ⭩ left thumb cluster ⭨                            /* split */                                             ⭩ right thumb cluster ⭨            ⭦ right hand ⭧
-                                                     KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,
-                                                              KC_TRNS,                          /* split */                                     KC_TRNS,
-                                            KC_TRNS, KC_TRNS, KC_TRNS,                          /* split */                                     KC_TRNS,            KC_TRNS,            KC_TRNS
+                                                     KC_TRNS, KC_TRNS,                          /* split */                                     RM_PREV,            RM_NEXT,
+                                                              RM_VALU,                          /* split */                                     RM_SPDU,
+                                            KC_TRNS, KC_TRNS, RM_VALD,                          /* split */                                     RM_SPDD,            KC_TRNS,            KC_TRNS
     ),
     // Layer 3
     [NAV] = LAYOUT_ergodox_pretty(
@@ -67,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-// nav_combo = F and D
+// nav_combo = S and D
 const uint16_t PROGMEM nav_combo[] = {KC_S, KC_D, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(nav_combo, MO(NAV)), // toggle the NAV layer while holding down F & D
+    COMBO(nav_combo, MO(NAV)), // toggle the NAV layer while holding down S & D
 };
 
 // add <Left paren/right paren> to the alternate repeat key pairings

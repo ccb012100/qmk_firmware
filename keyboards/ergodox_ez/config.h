@@ -115,7 +115,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Caps Word (<https://docs.qmk.fm/features/caps_word>)
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
-#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
+// #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD // this seems to be buggy on my keyboard
 #define CAPS_WORD_INVERT_ON_SHIFT
 
 // Copied over from my Oryx ZSA config
