@@ -64,13 +64,17 @@ combo_t key_combos[] = {
 };
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    /* Disable combo `NAV_COMBO` on layer `WIN_BASE` */
-    switch (combo_index) {
+    if (layer_state_is(WIN_BASE)) {
+        return false;
+    }
+    // leaving in the switch case as an example in case I need it in the future
+    /* switch (combo_index) {
+        // Disable combo `NAV_COMBO` on layer `WIN_BASE`
         case NAV_COMBO:
             if (layer_state_is(WIN_BASE)) {
                 return false;
             }
-    }
+    } */
 
     return true;
 }
