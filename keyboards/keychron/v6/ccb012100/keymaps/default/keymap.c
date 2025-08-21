@@ -52,19 +52,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,                _______,  _______,                                _______,                                                                  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,            _______,  _______),
 };
 // clang-format on
-enum combo_events {
-    NAV_COMBO,
-};
+enum combo_events { NAV_COMBO, MEH_L_COMBO, MEH_R_COMBO };
 
-// nav_combo = hold down S and D
+// nav_combo -> hold down S and D
 const uint16_t PROGMEM nav_combo[] = {KC_S, KC_D, COMBO_END};
+// mehL_combo -> hold down X and C
+const uint16_t PROGMEM mehL_combo[] = {KC_X, KC_C, COMBO_END};
+// mehR_combo -> hold down , and .
+const uint16_t PROGMEM mehR_combo[] = {KC_COMM, KC_DOT, COMBO_END};
 
-combo_t key_combos[] = {
-    [NAV_COMBO] = COMBO(nav_combo, MO(NAV_LAYER)), // toggle the NAV_LAYER while holding down S & D
-};
+combo_t key_combos[] = {[NAV_COMBO]   = COMBO(nav_combo, MO(NAV_LAYER)), // hold S & D to toggle NAV_LAYER
+                        [MEH_L_COMBO] = COMBO(mehL_combo, KC_MEH),       // hold X and C for Meh key
+                        [MEH_R_COMBO] = COMBO(mehR_combo, KC_MEH)};      // hold , and . for Meh key
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     if (layer_state_is(WIN_BASE)) {
+        // exclude WIN_BASE from combos
         return false;
     }
     // leaving in the switch case as an example in case I need it in the future
