@@ -67,15 +67,21 @@ combo_t key_combos[] = {[NAV_COMBO]   = COMBO(nav_combo, MO(NAV_LAYER)), // hold
                         [MEH_R_COMBO] = COMBO(mehR_combo, KC_MEH)};      // hold M and . for Meh key
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    if (layer_state_is(WIN_BASE)) {
-        // exclude WIN_BASE from combos
+    /*
+     * Exclude WIN_BASE from combos.
+     *
+     * NOTE: Keychron's hardware toggle switch changes the default layer via `default_layer_state`.
+     * `layer_state_is()` only checks the overlay layer state, so we want to use
+     * `get_highest_layer(default_layer_state)` instead.
+     */
+    if (get_highest_layer(default_layer_state) == WIN_BASE) {
         return false;
     }
     // leaving in the switch case as an example in case I need it in the future
     /* switch (combo_index) {
         // Disable combo `NAV_COMBO` on layer `WIN_BASE`
         case NAV_COMBO:
-            if (layer_state_is(WIN_BASE)) {
+            if (get_highest_layer(default_layer_state) == WIN_BASE) {
                 return false;
             }
     } */
