@@ -53,5 +53,11 @@
             "fileMatch": ["keymap.json"],
             "url": "./data/schemas/keymap.jsonschema"
         }
-    ]
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "/^make keychron/v6/ccb012100:default$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }

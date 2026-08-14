@@ -102,5 +102,5 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 }
 
 #if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {[MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [NAV] = {ENCODER_CCW_CW(RM_VALD, RM_VALU)}, [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}};
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {[MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [NAV_LAYER] = {ENCODER_CCW_CW(RM_VALD, RM_VALU)}, [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}};
 #endif // ENCODER_MAP_ENABLE
