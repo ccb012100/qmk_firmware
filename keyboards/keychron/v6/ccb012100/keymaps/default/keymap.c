@@ -66,6 +66,40 @@ combo_t key_combos[] = {[NAV_COMBO]   = COMBO(nav_combo, MO(NAV_LAYER)), // hold
                         [MEH_L_COMBO] = COMBO(mehL_combo, KC_MEH),       // hold Z and C for Meh key
                         [MEH_R_COMBO] = COMBO(mehR_combo, KC_MEH)};      // hold M and . for Meh key
 
+static bool f17_held = false;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode == KC_F17) {
+        f17_held = record->event.pressed;
+        return true;
+    }
+
+    // When encoder map events are enabled, intercept those key events directly.
+    if (f17_held && IS_ENCODEREVENT(record->event)) {
+        if (record->event.pressed) {
+            if (record->event.type == ENCODER_CW_EVENT) {
+                tap_code16(QK_MOUSE_WHEEL_UP);
+            } else if (record->event.type == ENCODER_CCW_EVENT) {
+                tap_code16(QK_MOUSE_WHEEL_DOWN);
+            }
+        }
+        return false;
+    }
+
+    return true;
+}
+
+#if defined(ENCODER_ENABLE)
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (f17_held) {
+        tap_code16(clockwise ? QK_MOUSE_WHEEL_DOWN : QK_MOUSE_WHEEL_UP);
+        return false;
+    }
+
+    return true;
+}
+#endif
+
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     /*
      * Exclude WIN_BASE from combos.
@@ -102,5 +136,5 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 }
 
 #if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {[MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [NAV] = {ENCODER_CCW_CW(RM_VALD, RM_VALU)}, [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}};
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {[MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [NAV_LAYER] = {ENCODER_CCW_CW(RM_VALD, RM_VALU)}, [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}};
 #endif // ENCODER_MAP_ENABLE
